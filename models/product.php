@@ -1,7 +1,7 @@
 <?php
   class Product {
 
-    // we define 3 attributes
+    // we define 3 attributes  #attributes can be amended according to needs of the website.
     public $id;
     public $name;
     public $price;
@@ -12,18 +12,18 @@
       $this->price = $price;
     }
 
-    public static function all() {
+    public static function all() { //connects to database and created an array.
       $list = [];
       $db = Db::getInstance();
       $req = $db->query('SELECT * FROM product');
       // we create a list of Product objects from the database results
-      foreach($req->fetchAll() as $product) {
+      foreach($req->fetchAll() as $product) { //fetch all and list information about each product
         $list[] = new Product($product['id'], $product['name'], $product['price']);
       }
       return $list;
     }
 
-    public static function find($id) {
+    public static function find($id) { 
       $db = Db::getInstance();
       //use intval to make sure $id is an integer
       $id = intval($id);
